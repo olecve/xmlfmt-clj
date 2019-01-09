@@ -1,0 +1,3 @@
+* xmlfmt-clj
+
+XML formatter tool written in clojure. It is early prototype version and not ready to be used.
