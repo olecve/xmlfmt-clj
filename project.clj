@@ -5,7 +5,7 @@
             [lein-ring "0.9.7"]
             [lein-try "0.4.3"]
             [test2junit "1.2.2"]]
-  :main xmlfmt-clj.core
+  :main xmlfmt-clj.main
   :profiles {:uberjar {:aot :all}
              :dev     {:dependencies          [[org.clojure/tools.namespace "0.2.11"]]
                        :test2junit-output-dir "target/test-results"

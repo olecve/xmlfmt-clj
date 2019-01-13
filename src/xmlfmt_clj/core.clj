@@ -1,7 +1,6 @@
 (ns xmlfmt-clj.core
   (:require [clojure.java.io :as io]
-            [clojure.xml :as xml])
-  (:gen-class))
+            [clojure.xml :as xml]))
 
 (defn string->input-stream [s] (-> s (.getBytes "UTF-8") (io/input-stream)))
 
@@ -61,6 +60,3 @@
   (doseq [file-name (find-files folder)]
     (do (println file-name)
         (format-file file-name))))
-
-(defn -main []
-  (println "not implemented yet"))
