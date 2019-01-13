@@ -41,13 +41,6 @@
     (p-declaration)
     (p-el data 0)))
 
-(defn find-files [folder]
-  (->> (clojure.java.io/file folder)
-       file-seq
-       (filter #(.isFile %))
-       (filter #(clojure.string/ends-with? (.getFileName (.toPath %)) ".xml"))
-       (mapv #(.getAbsolutePath %))))
-
 (defn format-file [file-name]
   (let [input-stream (io/input-stream file-name)
         parsed (xml/parse input-stream)]
@@ -55,8 +48,3 @@
       (binding [*out* output]
         (p-declaration)
         (p-el parsed 0)))))
-
-(defn format-files [folder]
-  (doseq [file-name (find-files folder)]
-    (do (println file-name)
-        (format-file file-name))))
