@@ -15,10 +15,12 @@
 
 (def ^:const xmlns "xmlns:")
 (defn compare-attrs [left right]
-  (if (and (not (starts-with? (name left) xmlns))
-           (starts-with? (name right) xmlns))
-    1
-    (compare left right)))
+  (cond
+    (and (not (starts-with? (name left) xmlns))
+         (starts-with? (name right) xmlns)) 1
+    (and (starts-with? (name left) xmlns)
+         (not (starts-with? (name right) xmlns))) -1
+    :else (compare left right)))
 
 (defn p-attrs [{:keys [attrs]} level]
   (when attrs

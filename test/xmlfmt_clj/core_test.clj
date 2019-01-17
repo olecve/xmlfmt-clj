@@ -51,4 +51,15 @@
                         "  string-content\n"
                         "</root>\n")]
       (is (= expected
-             (with-out-str (xmlfmt/format-string "<root key=\"value\" xmlns:b=\"http://b\" xmlns:a=\"http://a\">string-content</root>")))))))
+             (with-out-str (xmlfmt/format-string "<root key=\"value\" xmlns:b=\"http://b\" xmlns:a=\"http://a\">string-content</root>"))))))
+
+  (testing "attributes with different prefixes"
+    (let [expected (str "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+                        "<root\n"
+                        "  xmlns:sling=\"xmlns\"\n"
+                        "  jcr:mixin=\"jcr\"\n"
+                        "/>\n")]
+      (is (= expected
+             (with-out-str (xmlfmt/format-string "<root xmlns:sling=\"xmlns\" jcr:mixin=\"jcr\"/>"))))
+      (is (= expected
+             (with-out-str (xmlfmt/format-string "<root jcr:mixin=\"jcr\" xmlns:sling=\"xmlns\"/>")))))))
