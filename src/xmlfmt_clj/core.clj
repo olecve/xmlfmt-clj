@@ -1,5 +1,6 @@
 (ns xmlfmt-clj.core
   (:require [clojure.java.io :as io]
+            [clojure.string :refer [starts-with?]]
             [clojure.xml :as xml]))
 
 (defn string->input-stream [s] (-> s (.getBytes "UTF-8") (io/input-stream)))
@@ -12,11 +13,17 @@
 
 (defn p-attr [attr-indent attr] (p attr-indent (name (key attr)) "=\"" (val attr) "\"\n"))
 
+(defn compare-attrs [left right]
+  (if (and (not (starts-with? (name left) "xmlns:"))
+           (starts-with? (name right) "xmlns:"))
+    1
+    (compare left right)))
+
 (defn p-attrs [{:keys [attrs]} level]
   (when attrs
     (let [attr-indent (gen-indent (+ 1 level) 2)]
       (p "\n")
-      (doseq [attr (into (sorted-map) attrs)]
+      (doseq [attr (into (sorted-map-by #(compare-attrs %1 %2)) attrs)]
         (p-attr attr-indent attr)))))
 
 (defn el->tag [el] (name (:tag el)))

@@ -39,4 +39,16 @@
                         "<tag>\n"
                         "  string-content\n"
                         "</tag>\n")]
-      (is (= expected (with-out-str (xmlfmt/format-string "<tag>string-content</tag>")))))))
+      (is (= expected (with-out-str (xmlfmt/format-string "<tag>string-content</tag>"))))))
+
+  (testing "attributes with xmlns"
+    (let [expected (str "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+                        "<root\n"
+                        "  xmlns:a=\"http://a\"\n"
+                        "  xmlns:b=\"http://b\"\n"
+                        "  key=\"value\"\n"
+                        ">\n"
+                        "  string-content\n"
+                        "</root>\n")]
+      (is (= expected
+             (with-out-str (xmlfmt/format-string "<root key=\"value\" xmlns:b=\"http://b\" xmlns:a=\"http://a\">string-content</root>")))))))
