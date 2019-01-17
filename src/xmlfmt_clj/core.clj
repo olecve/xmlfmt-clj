@@ -14,12 +14,12 @@
 (defn p-attr [attr-indent attr] (p attr-indent (name (key attr)) "=\"" (val attr) "\"\n"))
 
 (def ^:const xmlns "xmlns:")
+(defn xmlns-attr? [attr] (starts-with? (name attr) xmlns))
+
 (defn compare-attrs [left right]
   (cond
-    (and (not (starts-with? (name left) xmlns))
-         (starts-with? (name right) xmlns)) 1
-    (and (starts-with? (name left) xmlns)
-         (not (starts-with? (name right) xmlns))) -1
+    (and (not (xmlns-attr? left)) (xmlns-attr? right)) 1
+    (and (xmlns-attr? left) (not (xmlns-attr? right))) -1
     :else (compare left right)))
 
 (defn p-attrs [{:keys [attrs]} level]
