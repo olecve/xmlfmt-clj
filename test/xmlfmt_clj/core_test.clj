@@ -74,7 +74,7 @@
       (is (= expected
              (with-out-str (xmlfmt/format-string "<root   ><child   />   </root>"))))))
 
-  (testing "attributes with different prefixes"
+  (testing "child tag with keys"
     (let [expected (str "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                         "<root>\n"
                         "  <child\n"
