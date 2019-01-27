@@ -64,15 +64,24 @@
       (is (= expected
              (with-out-str (xmlfmt/format-string "<root jcr:mixin=\"jcr\" xmlns:sling=\"xmlns\"/>"))))))
 
-  (testing "attributes with different prefixes"
+  (testing "multiple children"
     (let [expected (str "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-                        "<root>\n"
-                        "  <child/>\n"
-                        "</root>\n")]
+                        "<level-1>\n"
+                        "  <level-2/>\n"
+                        "</level-1>\n")]
       (is (= expected
-             (with-out-str (xmlfmt/format-string "<root><child /></root>"))))
+             (with-out-str (xmlfmt/format-string "<level-1><level-2 /></level-1>"))))
       (is (= expected
-             (with-out-str (xmlfmt/format-string "<root   ><child   />   </root>"))))))
+             (with-out-str (xmlfmt/format-string "<level-1   ><level-2   />   </level-1>")))))
+
+    (let [expected (str "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+                        "<level-1>\n"
+                        "  <level-2>\n"
+                        "    <level-3/>\n"
+                        "  </level-2>\n"
+                        "</level-1>\n")]
+      (is (= expected
+             (with-out-str (xmlfmt/format-string "<level-1><level-2><level-3/></level-2></level-1>"))))))
 
   (testing "child tag with keys"
     (let [expected (str "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
