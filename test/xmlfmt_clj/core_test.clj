@@ -72,4 +72,17 @@
       (is (= expected
              (with-out-str (xmlfmt/format-string "<root><child /></root>"))))
       (is (= expected
-             (with-out-str (xmlfmt/format-string "<root   ><child   />   </root>")))))))
+             (with-out-str (xmlfmt/format-string "<root   ><child   />   </root>"))))))
+
+  (testing "attributes with different prefixes"
+    (let [expected (str "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+                        "<root>\n"
+                        "  <child\n"
+                        "    a-key=\"a-val\"\n"
+                        "    b-key=\"b-val\"\n"
+                        "  />\n"
+                        "</root>\n")]
+      (is (= expected
+             (with-out-str (xmlfmt/format-string "<root><child a-key=\"a-val\" b-key=\"b-val\" /></root>"))))
+      (is (= expected
+             (with-out-str (xmlfmt/format-string "<root   ><child a-key=\"a-val\" b-key=\"b-val\" />   </root>")))))))

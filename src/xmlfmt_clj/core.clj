@@ -35,7 +35,8 @@
   (let [indent (gen-indent level 2)]
     (if (string? el)
       (p indent el "\n")
-      (let [tag (el->tag el)]
+      (let [tag (el->tag el)
+            final-indent (if (:attrs el) indent "")]
         (p indent "<" tag)
         (p-attrs el level)
         (if-let [content (:content el)]
@@ -44,7 +45,7 @@
             (doseq [inner-el content]
               (p-el inner-el (inc level)))
             (p indent "</" tag ">\n"))
-          (p "/>\n"))))))
+          (p final-indent "/>\n"))))))
 
 (defn format-string [str]
   (let [data (xml/parse (string->input-stream str))]
