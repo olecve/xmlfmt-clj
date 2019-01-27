@@ -8,7 +8,7 @@
        (filter #(.isFile %))
        (mapv #(.getAbsolutePath %))
        (filter #(re-find #".*\.xml$" %))
-       (remove #(re-find #".*(\.idea|\.mvn).*" %))
+       (remove #(re-find #".*(\.idea|\.mvn|node_modules|target).*" %))
        (remove #(re-find #".*pom.xml$" %))))
 
 (defn -main [& args]
