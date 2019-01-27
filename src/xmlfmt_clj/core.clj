@@ -44,7 +44,7 @@
             (doseq [inner-el content]
               (p-el inner-el (inc level)))
             (p indent "</" tag ">\n"))
-          (p indent "/>\n"))))))
+          (p "/>\n"))))))
 
 (defn format-string [str]
   (let [data (xml/parse (string->input-stream str))]

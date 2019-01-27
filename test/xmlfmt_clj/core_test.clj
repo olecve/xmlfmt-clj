@@ -62,4 +62,14 @@
       (is (= expected
              (with-out-str (xmlfmt/format-string "<root xmlns:sling=\"xmlns\" jcr:mixin=\"jcr\"/>"))))
       (is (= expected
-             (with-out-str (xmlfmt/format-string "<root jcr:mixin=\"jcr\" xmlns:sling=\"xmlns\"/>")))))))
+             (with-out-str (xmlfmt/format-string "<root jcr:mixin=\"jcr\" xmlns:sling=\"xmlns\"/>"))))))
+
+  (testing "attributes with different prefixes"
+    (let [expected (str "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+                        "<root>\n"
+                        "  <child/>\n"
+                        "</root>\n")]
+      (is (= expected
+             (with-out-str (xmlfmt/format-string "<root><child /></root>"))))
+      (is (= expected
+             (with-out-str (xmlfmt/format-string "<root   ><child   />   </root>")))))))
