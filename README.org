@@ -7,7 +7,7 @@ XML formatter tool written in clojure. It is early prototype version and not rea
 You may download it using following curl command
 
 #+BEGIN_SRC shell
-curl -LJ --output xmlfmt.jar https://github.com/olecve/xmlfmt-clj/releases/download/0.1.0-alpha.1/xmlfmt-clj-0.1.0-alpha.1-standalone.jar
+curl -LJ --output xmlfmt.jar https://github.com/olecve/xmlfmt-clj/releases/download/0.1.0-alpha.2/xmlfmt-clj-0.1.0-alpha.2-standalone.jar
 #+END_SRC
 
 and then run it from a command line
