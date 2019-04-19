@@ -6,6 +6,8 @@
             [lein-try "0.4.3"]
             [test2junit "1.2.2"]]
   :main xmlfmt-clj.main
+  :scm {:name "git"
+        :url  "https://github.com/olecve/xmlfmt-cl"}
   :profiles {:uberjar {:aot :all}
              :dev     {:dependencies          [[org.clojure/tools.namespace "0.2.11"]]
                        :test2junit-output-dir "target/test-results"
