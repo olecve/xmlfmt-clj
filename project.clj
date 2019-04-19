@@ -1,4 +1,4 @@
-(defproject xmlfmt-clj "0.1.0"
+(defproject xmlfmt-clj "0.1.0-alpha.2"
   :description "xmlfmt-clj"
   :dependencies [[org.clojure/clojure "1.10.0"]]
   :plugins [[lein-ancient "0.6.14"]
